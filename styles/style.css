@@ -115,6 +115,7 @@ body {
   border-bottom: 2px solid #0C044C;
   font-size: 17px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 .layout__aside-b__form button {
   background: #0C044C;
