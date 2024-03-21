@@ -27,10 +27,12 @@ const generateBook = (book, img, items, attributes, attrValue) => {
         if (items[i] === "In-Stock") {
             item.textContent = "In stock";
             item.classList.add("stocked");
+            item.setAttribute("id", "stocked")
             infoDiv.append(item);
         }else if (items[i] === "Not-In-Stock"){
             item.textContent = "Not in stock";
             item.classList.add("notStocked");
+            item.setAttribute("id", "stocked")
             infoDiv.append(item);
         }else {
             item.textContent = items[i];
@@ -41,7 +43,12 @@ const generateBook = (book, img, items, attributes, attrValue) => {
         if(i < 2) {
             book.setAttribute(attributes[i], attrValue[i]);
         }  
+        console.log(item)
     }
+
+    
+
+    
     
     infoDiv.append(trashcan);
     book.append(infoDiv);
@@ -63,11 +70,12 @@ addButton.addEventListener("click", (e) => {
     const price = document.createElement("span");
     const asideb = document.getElementById("aside-b")
     
-    
+    // ! Removing the set completion status
     if (completion && completion.parentNode) {
         completion.parentNode.removeChild(completion);
     }
 
+    // ! Check if all the inputs have text
     for (let i = 0; i < formArr.length - 2; i++) {
         if (formArr[i].value === "") {
             completion = document.createElement("p");
@@ -90,9 +98,23 @@ addButton.addEventListener("click", (e) => {
     
     completion.setAttribute("class", "layout__aside-b__form__complete")
     asideb.append(completion);
+
     
-    generateBook(book,  imgElement, [title, author, stockValue, priceValue], ["class", "id"],["layout__main__books__book", title]);
+    generateBook(book, imgElement, [title, author, stockValue, priceValue], ["class", "id"],["layout__main__books__book", title]);
     books.append(book);
+
+    const stockButton = document.getElementById("stocked")
+    stockButton.addEventListener("click", () => {
+        if(stockButton.classList.contains("notStocked")){
+            stockButton.classList.remove("notStocked");
+            stockButton.classList.add("stocked");
+            stockButton.textContent = "In stock";
+        }else {
+            stockButton.classList.remove("stocked")
+            stockButton.classList.add("notStocked");
+            stockButton.textContent = "Not in stock";
+        }
+    })
 
     e.target.form[0].value = ""
     e.target.form[1].value = ""
