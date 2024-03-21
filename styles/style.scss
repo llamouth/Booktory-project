@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    background: #E0E0E0;
+    font-family: "Montserrat";
+}
+body {
+    margin: 5px;
+    padding: 5px;
+    height: 100vh;
+    display: flex; 
+}
+
+.layout {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 4fr 3fr;
+    grid-template-rows: repeat(auto, minmax(100px, 1200px));
+    grid-template-areas: 
+    "aside-a main aside-b";
+
+
+    &__aside-a {
+        grid-area: aside-a;
+        color: #0C044C;
+        padding-left: 10px;
+        writing-mode: vertical-lr;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        transform: rotate(180deg);
+    }
+
+    &__main {
+        // border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: 2px solid black;
+        grid-area: main;
+
+        &__books {
+            // border: 1px solid black;
+            height: fit-content;
+            width: 100%;
+            border-right: 1px solid #0C044C;
+            height: 500px;
+            display: grid;
+            grid-template-rows: auto;
+            gap: 0;
+            max-height: 500px;
+            overflow-y: auto;
+            box-sizing: border-box;
+
+            &__book {
+                padding-top: 10px;
+                border-bottom: 2px solid #0C044C;
+                min-height: 167px;
+                max-height: 167px;
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                grid-template-rows: 1fr;
+                grid-template-areas: 
+                "image info";
+                
+                img {
+                    // border: 2px solid black;
+                    grid-area: image;
+                    width: 100px;
+                }
+
+                &__info {
+                    grid-area: info;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    // border: 2px solid black;
+                }
+
+                i {
+                    grid-area: trash;
+                    display: flex;
+                    font-size: 30px;
+                    justify-self: center;
+                    align-self: center;
+                    position: relative;
+                    right: -30px;
+                    bottom: 60px;
+                    border: 0;
+
+                    &:hover{
+                        cursor: pointer;
+                        transform: scale(1.4);
+                    }
+                }
+                
+            }
+        }
+
+        
+    }
+
+    &__aside-b {
+        grid-area: aside-b;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+        &__form {
+
+            width: 530px;
+            height: 580px;
+            display: grid;
+            grid-auto-flow: row;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            position: relative;
+
+            input {
+                margin-top: 10px;
+                outline: 0;
+                border: 0;
+                border-bottom: 2px solid #0C044C;
+                width: 255px;
+                padding-bottom: 10px;
+
+                &::placeholder {
+                    font-size: 17px;
+                }
+            }
+
+            select {
+                border: 0;
+                outline: 0;
+                border-bottom: 2px solid #0C044C;
+                font-size: 17px;
+                padding-bottom: 10px;
+            }
+
+            button {
+                background: #0C044C;
+                padding: 15px;
+                border-radius: 50px;
+                color: white;
+                border: 0;
+                outline: 0;
+            }
+
+            &__incomplete {
+                font-size: 14px; 
+                color: red;
+            }
+
+            &__complete {
+                font-size: 14px; 
+                color: green;
+            }
+        }
+    }
+}
+
+.stocked {
+    font-size: 8px;
+    width: 60px;
+    background: #238100;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.notStocked {
+    font-size: 8px;
+    width: 60px;
+    background: red;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.title{
+    color: #0C044C;
+    font-family: "IM Fell English";
+    font-size: 24px;
+}
+
+.author {
+    font-size: 16px;
+    font: "Charm";
+}
+
+.price {
+    font: "Charm";
+    font-size: 20px;
+}

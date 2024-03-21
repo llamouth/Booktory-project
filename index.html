@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booktory</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/43323589b9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=IM+Fell+English:regular,italic" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Charm:regular,700" rel="stylesheet" />
+</head>
+<body>
+    <article class="layout">
+
+        <aside class="layout__aside-a">
+            <p>Booktory</p>
+        </aside>
+
+        <main class="layout__main">
+            <ul class="layout__main__books" id="books"></ul>
+        </main>
+
+        <aside class="layout__aside-b" id="aside-b">
+
+            <form class="layout__aside-b__form">
+                <input type="text" class="layout__aside-b__form__input" placeholder="Title">
+                <input type="text" class="layout__aside-b__form__input" placeholder="Author">
+                <input type="text" class="layout__aside-b__form__input" placeholder="Image URL">
+                <input type="text" class="layout__aside-b__form__input" placeholder="Price">
+                <select name="stock" id="stock">
+                    <option value="In-Stock" id="in-stock">In stock</option>
+                    <option value="Not-In-Stock" id="not-in-stock">Not in stock</option>
+                </select>
+                <button id="add">Add Book</button>
+            </form>
+
+        </aside>
+
+    </article>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
