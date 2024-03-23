@@ -147,20 +147,20 @@ body {
   background: #3221B5;
 }
 .form__incomplete {
-  position: relative;
-  top: 50px;
+  position: absolute;
+  bottom: 67px;
   font-size: 14px;
   color: red;
   display: block;
-  animation: hideMsg 5s forwards;
+  animation: hideMsg 10s forwards;
 }
 .form__complete {
-  position: relative;
-  top: 50px;
+  position: absolute;
+  bottom: 67px;
   font-size: 14px;
   color: green;
   display: block;
-  animation: hideMsg 5s forwards;
+  animation: hideMsg 10s forwards;
 }
 
 .stocked {

@@ -19,7 +19,7 @@ addButton.addEventListener("click", (e) => {
             title: title.value,
             author: author.value,
             image: image.value,
-            price: price.value,
+            price: `$${price.value}`,
             stockValue: stock.value, 
             inStock: `${stock.value === "In-Stock"}`
         };

@@ -1,3 +1,4 @@
+$primary-color: #0C044C;
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +32,7 @@ body {
 
 .aside-a {
     grid-area: aside-a;
-    color: #0C044C;
+    color: $primary-color;
     padding-left: 10px;
     writing-mode: vertical-lr;
     transform: rotate(180deg);
@@ -52,7 +53,7 @@ body {
 
 .books {
     width: 100%;
-    // border-right: 1px solid #0C044C;;
+    // border-right: 1px solid $primary-color;;
     display: grid;
     grid-template-rows: auto;
     max-height: 100vh;
@@ -63,7 +64,7 @@ body {
 
     &__book {
         padding-top: 10px;
-        border-bottom: 1px solid #0C044C;
+        border-bottom: 1px solid $primary-color;
         min-height: 167px;
         max-height: 167px;
         display: grid;
@@ -93,7 +94,7 @@ body {
             right: -125px;
             bottom: 80px;
             border: 0;
-            color: #0C044C;
+            color: $primary-color;
 
             &:hover{
                 cursor: pointer;
@@ -123,13 +124,13 @@ body {
     align-items: center;
     justify-content: center; 
     position: relative;
-    border-left: 1px solid#0C044C;
+    border-left: 1px solid$primary-color;
 
     input {
         margin-top: 10px;
         outline: 0;
         border: 0;
-        border-bottom: 2px solid #0C044C;
+        border-bottom: 2px solid $primary-color;
         width: 255px;
         padding-bottom: 10px;
 
@@ -141,14 +142,14 @@ body {
     select {
         border: 0;
         outline: 0;
-        border-bottom: 2px solid #0C044C;
+        border-bottom: 2px solid $primary-color;
         font-size: 17px;
         padding-bottom: 10px;
         cursor: pointer;
     }
 
     button {
-        background: #0C044C;
+        background: $primary-color;
         padding: 15px;
         border-radius: 50px;
         color: white;
@@ -162,21 +163,21 @@ body {
     }
 
     &__incomplete {
-        position: relative;
-        top: 50px;
+        position: absolute;
+        bottom: 67px;
         font-size: 14px; 
         color: red;
         display: block;
-        animation: hideMsg 5s forwards;
+        animation: hideMsg 10s forwards;
     }
 
     &__complete {
-        position: relative;
-        top: 50px;
+        position: absolute;
+        bottom: 67px;
         font-size: 14px; 
         color: green;
         display: block;
-        animation: hideMsg 5s forwards;
+        animation: hideMsg 10s forwards;
     }
 }
 
@@ -219,7 +220,7 @@ body {
 }
 
 .title {
-    color: #0C044C;
+    color: $primary-color;
     font-family: "IM Fell English";
     font-size: 24px;
 }
@@ -230,7 +231,7 @@ body {
 }
 
 .price {
-    color: #0C044C;
+    color: $primary-color;
     font: "Charm";
     font-size: 20px;
     font-weight: 500;

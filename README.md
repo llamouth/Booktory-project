@@ -14,7 +14,7 @@ This project is aimed at solidifying your understanding of fundamental web devel
 1. Input the title
 2. Input the authors name
 3. Input the books cover image url (Or any image url)
-4. Input the price, be sure to include the decimal and cents (e.g 10.00).
+4. Input the price, be sure to include the decimal and cents (e.g 10.00)
 
 ## 📋&nbsp; Functionalities
 
