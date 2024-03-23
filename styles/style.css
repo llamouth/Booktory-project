@@ -13,13 +13,23 @@ body {
 }
 
 .layout {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 4fr 3fr;
   grid-template-rows: repeat(auto, minmax(100px, 1200px));
   grid-template-areas: "aside-a main aside-b";
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
-.layout__aside-a {
+
+.template {
+  color: gray;
+  text-align: center;
+}
+
+.aside-a {
   grid-area: aside-a;
   color: #0C044C;
   padding-left: 10px;
@@ -30,23 +40,26 @@ body {
   justify-content: center;
   font-size: 60px;
 }
-.layout__main {
+
+.main {
   display: flex;
   align-items: center;
   justify-content: center;
   grid-area: main;
+  height: 100vh;
 }
-.layout__main__books {
+
+.books {
   width: 100%;
-  border-right: 1px solid #0C044C;
-  height: 500px;
   display: grid;
   grid-template-rows: auto;
-  max-height: 500px;
+  max-height: 100vh;
   overflow-y: auto;
   box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 80px;
 }
-.layout__main__books__book {
+.books__book {
   padding-top: 10px;
   border-bottom: 1px solid #0C044C;
   min-height: 167px;
@@ -56,49 +69,53 @@ body {
   grid-template-rows: 1fr;
   grid-template-areas: "image info";
 }
-.layout__main__books__book img {
+.books__book img {
   grid-area: image;
   width: 100px;
 }
-.layout__main__books__book__info {
+.books__book-info {
   grid-area: info;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.layout__main__books__book i {
+.books__book i {
   display: flex;
   font-size: 30px;
   justify-self: center;
   align-self: center;
   position: relative;
-  right: -30px;
-  bottom: 60px;
+  right: -125px;
+  bottom: 80px;
   border: 0;
   color: #0C044C;
 }
-.layout__main__books__book i:hover {
+.books__book i:hover {
   cursor: pointer;
   transform: scale(1.4);
 }
-.layout__aside-b {
+
+.aside-b {
   grid-area: aside-b;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  box-sizing: border-box;
+  height: 100vh;
 }
-.layout__aside-b__form {
+
+.form {
   width: 530px;
   height: 580px;
   display: grid;
   grid-auto-flow: row;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   position: relative;
+  border-left: 1px solid #0C044C;
 }
-.layout__aside-b__form input {
+.form input {
   margin-top: 10px;
   outline: 0;
   border: 0;
@@ -106,10 +123,10 @@ body {
   width: 255px;
   padding-bottom: 10px;
 }
-.layout__aside-b__form input::placeholder {
+.form input::placeholder {
   font-size: 17px;
 }
-.layout__aside-b__form select {
+.form select {
   border: 0;
   outline: 0;
   border-bottom: 2px solid #0C044C;
@@ -117,7 +134,7 @@ body {
   padding-bottom: 10px;
   cursor: pointer;
 }
-.layout__aside-b__form button {
+.form button {
   background: #0C044C;
   padding: 15px;
   border-radius: 50px;
@@ -126,16 +143,24 @@ body {
   outline: 0;
   cursor: pointer;
 }
-.layout__aside-b__form button:hover {
+.form button:hover {
   background: #3221B5;
 }
-.layout__aside-b__form__incomplete {
+.form__incomplete {
+  position: relative;
+  top: 50px;
   font-size: 14px;
   color: red;
+  display: block;
+  animation: hideMsg 5s forwards;
 }
-.layout__aside-b__form__complete {
+.form__complete {
+  position: relative;
+  top: 50px;
   font-size: 14px;
   color: green;
+  display: block;
+  animation: hideMsg 5s forwards;
 }
 
 .stocked {
@@ -184,8 +209,20 @@ body {
 }
 
 .price {
+  color: #0C044C;
   font: "Charm";
   font-size: 20px;
+  font-weight: 500;
+}
+
+@keyframes hideMsg {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

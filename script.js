@@ -1,124 +1,143 @@
 // ! Retrieving the elements needed from the HTML
 const books = document.getElementById("books");
 const addButton = document.getElementById("add");
-let completion;
+const template = document.getElementById("template")
+const layout = document.getElementById("layout")
+const title = document.getElementById("title");
+const asideb = document.getElementById("aside-b");
+const errorMsg = document.createElement("p");
+const completionMsg = document.createElement("p");
+const removeMsg = document.createElement("p")
 
-// ! Generate the book element
-const generateBook = (book, img, items, attributes, attrValue) => {
-    const infoDiv = document.createElement("div");
-    const trashcan = document.createElement("i");
-    const classArr = ["title", "author", "_", "price"];
+addButton.addEventListener("click", (e) => {
+   
+    const form = e.target.form;
+        
+    if (validateForm(form)) { 
+        const [title, author, image, price, stock] = form;
+        const bookObj = {
+            title: title.value,
+            author: author.value,
+            image: image.value,
+            price: price.value,
+            stockValue: stock.value, 
+            inStock: `${stock.value === "In-Stock"}`
+        };
 
-    // ! Setting The Attributes for the trash can and the infodiv
-    trashcan.setAttribute("class","fa-solid fa-trash-can");
-    infoDiv.setAttribute("class", "layout__main__books__book__info");
-    book.append(img); // ! Append the image to the book element
+        books.append(generateBook(bookObj)); 
+        
+        
+        handleFormCompleteMessage();
+        displayTemplate();
 
-    // ! Adding an eventlistener to the trashcan to remove the whole book element
-    trashcan.addEventListener("click", () => {
-        book.remove();
-    })
-
-    // ! Looping through the items array 
-    for(let i = 0; i < items.length; i++) {
-        const item = document.createElement("p")
-
-        // ! Here checking if the current element equals the stockvalue, if its not equal the stockvalue, generate the infodiv setting the textcontent of the item, set the attribute to the item and append it to the infodiv
-        if (items[i] === "In-Stock") {
-            item.textContent = "In stock";
-            item.classList.add("stocked");
-            item.setAttribute("id", "stocked")
-            infoDiv.append(item);
-        }else if (items[i] === "Not-In-Stock"){
-            item.textContent = "Not in stock";
-            item.classList.add("notStocked");
-            item.setAttribute("id", "stocked")
-            infoDiv.append(item);
-        }else {
-            item.textContent = items[i];
-            item.setAttribute("class", classArr[i]);
-            infoDiv.append(item);
-        }
-        // ! To avoid looping twice we only access the attributes array for the first 2 indexs because both arrays only have 2 elements within them
-        if(i < 2) {
-            book.setAttribute(attributes[i], attrValue[i]);
-        }  
-        console.log(item)
+        title.value = "";
+        author.value = "";
+        image.value = "";
+        price.value = "";
+    }else { 
+        handleFormErrorMessage(); 
     }
 
-    
+    e.preventDefault();
+})
 
+const validateForm = (formArr) => {
+
+    for (let i = 0; i < formArr.length - 1; i++) {
+        if (formArr[i].value === "") {
+            return false;
+        }
+    }
+    return true;
+}
+
+const handleFormErrorMessage = () => {
+
+    errorMsg.textContent = "Missing Required Book Information. Please fill out all fields";
+    errorMsg.setAttribute("class", "form__incomplete");
+    asideb.append(errorMsg);  
+    completionMsg.remove();    
+}
+
+const handleFormCompleteMessage = () => {
+
+    completionMsg.textContent = "Book Added"
+    completionMsg.setAttribute("class", "form__complete");
+    asideb.append(completionMsg)
+    errorMsg.remove()
+}
+
+const displayTemplate = () => {
+
+    const bookList = books.getElementsByTagName("li")
+    if(bookList.length === 0) {
+        books.append(template)
+    }else {
+        template.remove()
+    }
+}
+
+const generateBook = (bookObj) => {
+
+    const book = document.createElement("li");
+    const bookInfo = document.createElement("div");
+    const img = document.createElement("img");
+    const title = document.createElement("p");
+    const author = document.createElement("p");
+    const stock = document.createElement("div");
+    const price = document.createElement("p");
+    const trash = document.createElement("i");
+
+    book.setAttribute("class", "books__book")
+    bookInfo.setAttribute("class", "books__book-info")
+    img.setAttribute("src", bookObj.image)
+    title.setAttribute("class", "title")
+    author.setAttribute("class","author")
+    stock.setAttribute("class", `${bookObj.stockValue === "In-Stock" ? "stocked" : "notStocked"}`)
+    price.setAttribute("class", "price")
+    trash.setAttribute("class", "fa-solid fa-trash-can")
     
+    title.textContent = bookObj.title
+    author.textContent = bookObj.author
+    stock.textContent = bookObj.stockValue
+    price.textContent = bookObj.price
     
-    infoDiv.append(trashcan);
-    book.append(infoDiv);
+    bookInfo.append(title, author, stock,  price, trash)
+    book.append(img, bookInfo)
+
+    addEventsToBook([trash, book], stock)
+
+    return book
 }
 
 
 
+const addEventsToBook = (trashButtonArray, stockButton) => {
 
-addButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const formArr = e.target.form;
-    const title = e.target.form[0].value;
-    const author = e.target.form[1].value;
-    const image = e.target.form[2].value;
-    let priceValue = e.target.form[3].value;
-    const stockValue = e.target.form[4].value;
-    const book = document.createElement("li");
-    const imgElement = document.createElement("img");
-    const price = document.createElement("span");
-    const asideb = document.getElementById("aside-b")
-    
-    // ! Removing the set completion status
-    if (completion && completion.parentNode) {
-        completion.parentNode.removeChild(completion);
-    }
-
-    // ! Check if all the inputs have text
-    for (let i = 0; i < formArr.length - 2; i++) {
-        if (formArr[i].value === "") {
-            completion = document.createElement("p");
-            completion.textContent = "Missing Required Book Information. Please fill out all fields";
-            completion.setAttribute("class", "layout__aside-b__form__incomplete");
-            asideb.append(completion);
-            e.target.form[0].value = "";
-            e.target.form[1].value = "";
-            e.target.form[2].value = "";
-            e.target.form[3].value = "";
-            return;
-        }
-    }
-
-    priceValue = `$${priceValue}`;
-    completion = document.createElement("p");
-    completion.textContent = "Book added!";
-    price.textContent = priceValue;
-    imgElement.src = image;
-    
-    completion.setAttribute("class", "layout__aside-b__form__complete")
-    asideb.append(completion);
-
-    
-    generateBook(book, imgElement, [title, author, stockValue, priceValue], ["class", "id"],["layout__main__books__book", title]);
-    books.append(book);
-
-    const stockButton = document.getElementById("stocked")
-    stockButton.addEventListener("click", () => {
-        if(stockButton.classList.contains("notStocked")){
-            stockButton.classList.remove("notStocked");
-            stockButton.classList.add("stocked");
-            stockButton.textContent = "In stock";
-        }else {
-            stockButton.classList.remove("stocked")
-            stockButton.classList.add("notStocked");
-            stockButton.textContent = "Not in stock";
-        }
+    trashButtonArray[0].addEventListener("click", () => {
+        trashButtonArray[1].remove()
+        removeMsg.setAttribute("class", "remove");
+        removeMsg.textContent = "Book Removed"
+        
+        displayTemplate()
     })
 
-    e.target.form[0].value = ""
-    e.target.form[1].value = ""
-    e.target.form[2].value = ""
-    e.target.form[3].value = ""
-})
+    stockButton.addEventListener("click", () => {
+        if(stockButton.classList.contains("notStocked")) {
+            stockButton.classList.remove("notStocked")
+            stockButton.classList.add("stocked")
+            stockButton.textContent = "In-Stock"
+        }else {
+            stockButton.classList.remove("stocked")
+            stockButton.classList.add("notStocked")
+            stockButton.textContent = "Not-In-Stock"
+        }
+    })
+}
 
+// * Update BEM to appropriate naming, focus on component-based naming
+// * Update your JS to incorporate the updated BEM names
+// * create functions for code that is too long inside of other functions
+// * create a completion element and create a separate errormessage element
+
+ 
