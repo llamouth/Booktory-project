@@ -8,14 +8,7 @@ const errorMsg = document.createElement("p");
 const completeMsg = document.createElement("p");
 const template = document.createElement("p");
 
-// ! Function to add the hidden class to the pop up to remove the popup form from display
-const hidePopUp = () => {
-    if(popUp.classList.contains("hidden")){
-        popUp.classList.remove("hidden");
-    }else {
-        popUp.classList.add("hidden");
-    }
-}
+
 
 // ! Function to append the children to the parent
 const appendElements = (parent, children) => {
@@ -30,6 +23,15 @@ const settingAttributes = (element, arrayOfProperties) => {
 // ! Function to create text context for the book 
 const creatingTextContent = (element, text) => {
     element.textContent = text;
+}
+
+// ! Function to add the hidden class to the pop up to remove the popup form from display
+const hidePopUp = () => {
+    if(popUp.classList.contains("hidden")){
+        popUp.classList.remove("hidden");
+    }else {
+        popUp.classList.add("hidden");
+    }
 }
 
 // ! Function to remove the book when the trash is clicked
@@ -104,15 +106,14 @@ const changeStateOfStock = (stock) => {
 const loadTemplate = () => {
     settingAttributes(template, ["class", "template"]);
     creatingTextContent(template, "Add Books To Your Inventory")
-    appendElements(bookList, [template])
     checkAmountOfBooks();
+    appendElements(bookList, [template])
 }
 
 const checkAmountOfBooks = () => {
     const listOfBooks = document.getElementsByTagName("li")
     if(listOfBooks.length !== 0) {
         settingAttributes(template, ["class", "template hidden"]);
-        appendElements(bookList, [template]);
     }
 }
 
@@ -183,4 +184,4 @@ exitButton.addEventListener("click", (e) => {
 })
 
 
-loadTemplate()
+loadTemplate();
