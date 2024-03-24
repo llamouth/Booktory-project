@@ -9,11 +9,14 @@ const errorMsg = document.createElement("p");
 const completionMsg = document.createElement("p");
 const removeMsg = document.createElement("p")
 
+// ! Adding Event listener to the add button
 addButton.addEventListener("click", (e) => {
-   
+    // ! Retrieving the form after the click is pressed 
     const form = e.target.form;
-        
+    
+    // ! Checking if all of the forms inputs are valid
     if (validateForm(form)) { 
+        // ! Destructing the form array / Creating an object to hold the values
         const [title, author, image, price, stock] = form;
         const bookObj = {
             title: title.value,
@@ -24,23 +27,28 @@ addButton.addEventListener("click", (e) => {
             inStock: `${stock.value === "In-Stock"}`
         };
 
+        // ! Appending the completed returned book to the book list
         books.append(generateBook(bookObj)); 
         
-        
+        // ! Displaying complete message when form is completed correctly / calling display Template function
         handleFormCompleteMessage();
         displayTemplate();
 
+        // ! Resetting the values
         title.value = "";
         author.value = "";
         image.value = "";
         price.value = "";
     }else { 
+        // ! If the form had an invalid input it will run this code that will display error message
         handleFormErrorMessage(); 
     }
 
+    // ! Prevents the default action of the event
     e.preventDefault();
 })
 
+// ! Validate the form by looping through the form array and returning false if any of the values are empty. else return true
 const validateForm = (formArr) => {
 
     for (let i = 0; i < formArr.length - 1; i++) {
@@ -51,6 +59,7 @@ const validateForm = (formArr) => {
     return true;
 }
 
+// ! Funnction to display the error message
 const handleFormErrorMessage = () => {
 
     errorMsg.textContent = "Missing Required Book Information. Please fill out all fields";
@@ -59,6 +68,7 @@ const handleFormErrorMessage = () => {
     completionMsg.remove();    
 }
 
+// ! Function to display the complete Message
 const handleFormCompleteMessage = () => {
 
     completionMsg.textContent = "Book Added"
@@ -67,6 +77,7 @@ const handleFormCompleteMessage = () => {
     errorMsg.remove()
 }
 
+// ! Function to display the template if the book like is emptty
 const displayTemplate = () => {
 
     const bookList = books.getElementsByTagName("li")
@@ -77,6 +88,7 @@ const displayTemplate = () => {
     }
 }
 
+// ! Function to create the book element with its respective information
 const generateBook = (bookObj) => {
 
     const book = document.createElement("li");
@@ -111,7 +123,7 @@ const generateBook = (bookObj) => {
 }
 
 
-
+// ! Function that adds event listeners to the buttons within the book
 const addEventsToBook = (trashButtonArray, stockButton) => {
 
     trashButtonArray[0].addEventListener("click", () => {
