@@ -8,26 +8,27 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=IM+Fell+English:regular,italic" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Charm:regular,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/43323589b9.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <article class="layout" id="layout">
+
+    <article class="layout" id="layout">    
         
-        
-        <aside class="aside-a">
+        <header class="header">
             <p>Booktory</p>
-        </aside>
+            <button id="formButton">＋ Add Book</button>
+        </header>
 
         <main class="main">
             
-            <ul class="books" id="books" aria-placeholder="Add Book">
-                <p class="template" id="template">Add Books to your inventory</p>
+            <ul class="bookList" id="books" aria-placeholder="Add Book">
             </ul>
         </main>
-<!--change aside to aside-b -->
-        <aside class="aside-b" id="aside-b">
-            <!-- form -->
-            <form class="form">
+
+        <div class="pop-up hidden" id="pop-up">
+            <p id="exit">╳</p>
+            <form class="form" id="form">
                 <input type="text" placeholder="Title" id="title">
                 <input type="text" placeholder="Author">
                 <input type="text" placeholder="Image URL">
@@ -36,9 +37,9 @@
                     <option value="In-Stock" id="in-stock">In stock</option>
                     <option value="Not-In-Stock" id="not-in-stock">Not in stock</option>
                 </select>
-                <button id="add">Add Book</button>
+                <button id="submit">Submit</button>
             </form>
-        </aside>
+        </div>
 
     </article>
 
