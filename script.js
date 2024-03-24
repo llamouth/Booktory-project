@@ -1,4 +1,4 @@
-// ! Retrieving the elements needed from the HTML
+// ! Grabbing the elements needed from html / creating global variables used multiple times in the code
 const books = document.getElementById("books");
 const addButton = document.getElementById("add");
 const template = document.getElementById("template")
