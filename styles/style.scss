@@ -103,10 +103,19 @@ body {
         "info";
 
         img {
-            width: 200px;
             grid-area: img;
+            width: 200px;
             align-self: center;
             justify-self: start;
+        }
+
+        i{
+            font-size: 25px;
+
+            &:hover {
+                transform: scale(1.2);
+                cursor: pointer;
+            }
         }
 
     }  
@@ -143,8 +152,8 @@ body {
 }
 #exit {
     position: absolute;
-    top: -20px;
-    right: 10px;
+    top: -10px;
+    left: 10px;
     font-size: 25px;
     cursor: pointer;
 
@@ -172,8 +181,12 @@ body {
         border-bottom: 2px solid $primary-color;
         font-family: "Comfortaa";
         letter-spacing: 5px;
+    }
+
+    select, option {
         cursor: pointer;
     }
+
 
     button {
         height: 50px;

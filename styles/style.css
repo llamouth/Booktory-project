@@ -87,10 +87,17 @@ body {
   grid-template-areas: "img" "info";
 }
 .bookList li img {
-  width: 200px;
   grid-area: img;
+  width: 200px;
   align-self: center;
   justify-self: start;
+}
+.bookList li i {
+  font-size: 25px;
+}
+.bookList li i:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 .bookList__info {
   padding: 0;
@@ -122,8 +129,8 @@ body {
 
 #exit {
   position: absolute;
-  top: -20px;
-  right: 10px;
+  top: -10px;
+  left: 10px;
   font-size: 25px;
   cursor: pointer;
 }
@@ -149,6 +156,8 @@ body {
   border-bottom: 2px solid #452727;
   font-family: "Comfortaa";
   letter-spacing: 5px;
+}
+.form select, .form option {
   cursor: pointer;
 }
 .form button {
