@@ -21,17 +21,11 @@ const hidePopUp = () => {
 const validateForm = () => {
     for(let i = 0; i < form.length - 2; i++) {
         if(form[i].value.trim() === ""){
-            errorMsg.classList.add("incomplete")
-            errorMsg.textContent = "Missing Required Information"
-            popUp.append(errorMsg)
-            completeMsg.remove()
+            handleErrorMsg();
             return false
         }
     }
-    completeMsg.classList.add("complete")
-    completeMsg.textContent = "Book Added"
-    bookList.append(completeMsg)
-    errorMsg.remove()
+    handleCompleteMsg();
     return true
 }
 
@@ -39,6 +33,20 @@ const removeBook = (trash, book) => {
     trash.addEventListener("click", () => {
         book.remove()
     })
+}
+
+const handleErrorMsg = () => {
+    errorMsg.classList.add("incomplete")
+    errorMsg.textContent = "Missing Required Information"
+    popUp.append(errorMsg)
+    completeMsg.remove()
+}
+
+const handleCompleteMsg = () => {
+    completeMsg.classList.add("complete")
+    completeMsg.textContent = "Book Added"
+    bookList.append(completeMsg)
+    errorMsg.remove()
 }
 
 const changeStateOfStock = (stock) => {
