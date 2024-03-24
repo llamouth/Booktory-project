@@ -9,12 +9,39 @@ const completeMsg = document.createElement("p");
 
 // ! Function to remove the hidden class from the pop up to display the popup form
 const openPopUp = () => {
-    popUp.classList.remove("hidden")
+    popUp.classList.remove("hidden");
 }
 
 // ! Function to add the hidden class to the pop up to remove the popup form from display
 const hidePopUp = () => {
-    popUp.classList.add("hidden")
+    popUp.classList.add("hidden");
+}
+
+// ! Function to append the children to the parent
+const appendElements = (parent, children) => {
+    children.forEach(child => parent.append(child));
+}
+
+// ! Function to set attributes to book
+const settingAttributes = (element, arrayOfProperties) => {
+    element.setAttribute(arrayOfProperties[0], arrayOfProperties[1]);
+}
+
+// ! Function to create text context for the book 
+const creatingTextContent = (element, text) => {
+    element.textContent = text;
+}
+
+// ! Function to remove the book when the trash is clicked
+const removeBook = (trash, book) => {
+    trash.addEventListener("click", () => {
+        book.remove();
+    })
+}
+
+// * Not Working *
+const resetValues = (elements) => {
+    elements.forEach(element => {element.value = ""});
 }
 
 // ! Function to validate the input text
@@ -22,48 +49,60 @@ const validateForm = () => {
     for(let i = 0; i < form.length - 2; i++) {
         if(form[i].value.trim() === ""){
             handleErrorMsg();
-            return false
+            return false;
         }
     }
     handleCompleteMsg();
-    return true
+    return true;
 }
 
-const removeBook = (trash, book) => {
-    trash.addEventListener("click", () => {
-        book.remove()
-    })
+// ! Function that generates an object of the form values
+const handleFormValues = () => {
+    const [title, author, img, price, stock] = form;
+    const bookObj = {
+            title: title.value, 
+            author: author.value,
+            img: img.value,
+            price: price.value,
+            stock: stock.value,
+        }
+    return bookObj;
 }
 
+// ! Function to generate the error message and display it
 const handleErrorMsg = () => {
-    errorMsg.classList.add("incomplete")
-    errorMsg.textContent = "Missing Required Information"
-    popUp.append(errorMsg)
+    settingAttributes(errorMsg, ["class", "incomplete"]);
+    creatingTextContent(errorMsg, "Missing Required Information");
+    appendElements(popUp, [errorMsg])
     completeMsg.remove()
 }
 
+// ! Function to generrate the complete message and display it
 const handleCompleteMsg = () => {
-    completeMsg.classList.add("complete")
-    completeMsg.textContent = "Book Added"
-    bookList.append(completeMsg)
+    settingAttributes(completeMsg, ["class", "complete"]);
+    creatingTextContent(completeMsg, "Book Added");
+    appendElements(bookList, [completeMsg]);
     errorMsg.remove()
 }
 
+// ! Function to add event listen to the stock button to change wether the book is stocked or not in stock
 const changeStateOfStock = (stock) => {
     stock.addEventListener("click", () => {
         if(stock.classList.contains("notStocked")) {
-            stock.classList.remove("notStocked")
-            stock.classList.add("stocked")
-            stock.textContent = "In-Stock"
+            stock.classList.remove("notStocked");
+            settingAttributes(stock, ["class", "stocked"]);
+            creatingTextContent(stock, "In-Stock");
         }else {
-            stock.classList.remove("stocked")
-            stock.classList.add("notStocked")
-            stock.textContent = "Not-In-Stock"
+            stock.classList.remove("stocked");
+            settingAttributes(stock, ["class", "notStocked"]);
+            creatingTextContent(stock, "Not-In-Stock");
         }
     })
 }
 
-const createBook = (bookObj) => {
+
+// ! Function to create generate the book to add it to the book list
+const generateBook = (bookObj) => {
 
     const book = document.createElement("li");
     const imgTag = document.createElement("img");
@@ -74,61 +113,56 @@ const createBook = (bookObj) => {
     const stockButton = document.createElement("div");
     const trash = document.createElement("i");
 
-    book.setAttribute("class", "book");
-    imgTag.setAttribute("src", bookObj.img);
-    bookInfo.setAttribute("class", "bookList__info");
-    titleTag.setAttribute("class", "title");
-    authorTag.setAttribute("class", "author");
-    priceTag.setAttribute("class", "price")
-    stockButton.setAttribute("class", `${bookObj.stock === "In-Stock" ? "stocked" : "notStocked"}`)
-    stockButton.setAttribute("id", "stock")
-    trash.setAttribute("class", "fa-regular fa-trash-can")
+    settingAttributes(book, ["class", "book"]);
+    settingAttributes(imgTag, ["src", bookObj.img]);
+    settingAttributes(bookInfo, ["class", "bookList__info"]);
+    settingAttributes(titleTag, ["class", "title"]);
+    settingAttributes(authorTag, ["class", "author"]);
+    settingAttributes(priceTag, ["class", "price"]);
+    settingAttributes(stockButton, ["class", `${bookObj.stock === "In-Stock" ? "stocked" : "notStocked"}`]);
+    settingAttributes(stockButton, ["id", "stock"]);
+    settingAttributes(trash, ["class", "fa-regular fa-trash-can"]);
 
-    titleTag.textContent = bookObj.title;
-    authorTag.textContent = bookObj.author
-    priceTag.textContent = bookObj.price
-    stockButton.textContent = bookObj.stock
+    creatingTextContent(titleTag, bookObj.title);
+    creatingTextContent(authorTag, bookObj.author);
+    creatingTextContent(priceTag, bookObj.price);
+    creatingTextContent(stockButton, bookObj.stock);
 
-    bookInfo.append(titleTag, authorTag, stockButton, priceTag, trash);
-    book.append(imgTag, bookInfo);
-    bookList.append(book);
-
+    appendElements(bookInfo, [titleTag, authorTag, stockButton, priceTag, trash]);
+    appendElements(book, [imgTag, bookInfo]);
+    
     removeBook(trash, book);
     changeStateOfStock(stockButton);
+    return book;
 }
 
-
+// ! Adding an event listener to the formButton to display or not display the form pop up
 formButton.addEventListener("click", (e) => {
     if(popUp.classList.contains("hidden")){
         openPopUp();
     }else {
         hidePopUp();
     }
-    e.preventDefault()
+    e.preventDefault();
 })
 
+// ! Adding an event listener to the submit button to submit the form when function returns true
 submitButton.addEventListener("click", (e) => {
-    if(validateForm()){
-        const [title, author, img, price, stock] = form
-        const bookObj = {
-            title: title.value, 
-            author: author.value,
-            img: img.value,
-            price: price.value,
-            stock: stock.value,
-        }
+    if(validateForm()) {
 
-        createBook(bookObj)
-        popUp.classList.add("hidden")
+        appendElements(bookList, [generateBook(handleFormValues())]);
+        popUp.classList.add("hidden"); // * Not working with setting attributes function *
 
-        form[0].value = ""
-        form[1].value = ""
-        form[2].value = ""
-        form[3].value = ""
+        form[0].value = "";
+        form[1].value = "";
+        form[2].value = "";
+        form[3].value = "";
+        // resetValues(form) // * Did not work resetting values *
     }
-    e.preventDefault()
+    e.preventDefault();
 })
 
+// ! Adding an event listener to the exitbutton to hide the pop up when clicked
 exitButton.addEventListener("click", () => {  
     hidePopUp();
     e.preventDefault();
