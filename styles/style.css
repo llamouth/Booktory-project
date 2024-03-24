@@ -81,7 +81,7 @@ body {
   height: 600px;
   width: 450px;
   background: #E0E0E0;
-  box-shadow: 5px 5px 5px black;
+  box-shadow: 0px 5px 5px black;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "img" "info";
@@ -133,6 +133,7 @@ body {
   left: 10px;
   font-size: 25px;
   cursor: pointer;
+  color: #fff;
 }
 #exit:hover {
   transform: scale(1.2);
@@ -159,7 +160,7 @@ body {
   color: #fff;
 }
 .form input::placeholder, .form select::placeholder {
-  color: #fff;
+  color: #c1c1c1;
 }
 .form select, .form option {
   cursor: pointer;
@@ -246,6 +247,10 @@ body {
 .title {
   font-family: "IM Fell English";
   font-size: 25px;
+}
+
+.template {
+  color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */

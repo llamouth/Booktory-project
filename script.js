@@ -6,15 +6,15 @@ const bookList = document.getElementById("books")
 const exitButton = document.getElementById("exit")
 const errorMsg = document.createElement("p");
 const completeMsg = document.createElement("p");
-
-// ! Function to remove the hidden class from the pop up to display the popup form
-const openPopUp = () => {
-    popUp.classList.remove("hidden");
-}
+const template = document.createElement("p");
 
 // ! Function to add the hidden class to the pop up to remove the popup form from display
 const hidePopUp = () => {
-    popUp.classList.add("hidden");
+    if(popUp.classList.contains("hidden")){
+        popUp.classList.remove("hidden");
+    }else {
+        popUp.classList.add("hidden");
+    }
 }
 
 // ! Function to append the children to the parent
@@ -36,6 +36,7 @@ const creatingTextContent = (element, text) => {
 const removeBook = (trash, book) => {
     trash.addEventListener("click", () => {
         book.remove();
+        loadTemplate();
     })
 }
 
@@ -73,8 +74,8 @@ const handleFormValues = () => {
 const handleErrorMsg = () => {
     settingAttributes(errorMsg, ["class", "incomplete"]);
     creatingTextContent(errorMsg, "Missing Required Information");
-    appendElements(popUp, [errorMsg])
-    completeMsg.remove()
+    appendElements(popUp, [errorMsg]);
+    completeMsg.remove();
 }
 
 // ! Function to generrate the complete message and display it
@@ -82,7 +83,7 @@ const handleCompleteMsg = () => {
     settingAttributes(completeMsg, ["class", "complete"]);
     creatingTextContent(completeMsg, "Book Added");
     appendElements(bookList, [completeMsg]);
-    errorMsg.remove()
+    errorMsg.remove();
 }
 
 // ! Function to add event listen to the stock button to change wether the book is stocked or not in stock
@@ -100,6 +101,20 @@ const changeStateOfStock = (stock) => {
     })
 }
 
+const loadTemplate = () => {
+    settingAttributes(template, ["class", "template"]);
+    creatingTextContent(template, "Add Books To Your Inventory")
+    appendElements(bookList, [template])
+    checkAmountOfBooks();
+}
+
+const checkAmountOfBooks = () => {
+    const listOfBooks = document.getElementsByTagName("li")
+    if(listOfBooks.length !== 0) {
+        settingAttributes(template, ["class", "template hidden"]);
+        appendElements(bookList, [template]);
+    }
+}
 
 // ! Function to create generate the book to add it to the book list
 const generateBook = (bookObj) => {
@@ -133,16 +148,13 @@ const generateBook = (bookObj) => {
     
     removeBook(trash, book);
     changeStateOfStock(stockButton);
+
     return book;
 }
 
 // ! Adding an event listener to the formButton to display or not display the form pop up
 formButton.addEventListener("click", (e) => {
-    if(popUp.classList.contains("hidden")){
-        openPopUp();
-    }else {
-        hidePopUp();
-    }
+    hidePopUp();
     e.preventDefault();
 })
 
@@ -151,7 +163,7 @@ submitButton.addEventListener("click", (e) => {
     if(validateForm()) {
 
         appendElements(bookList, [generateBook(handleFormValues())]);
-        popUp.classList.add("hidden"); // * Not working with setting attributes function *
+        popUp.classList.add("hidden"); // * Not working with settingAttributes function *
 
         form[0].value = "";
         form[1].value = "";
@@ -159,11 +171,16 @@ submitButton.addEventListener("click", (e) => {
         form[3].value = "";
         // resetValues(form) // * Did not work resetting values *
     }
+    loadTemplate();
     e.preventDefault();
 })
 
 // ! Adding an event listener to the exitbutton to hide the pop up when clicked
-exitButton.addEventListener("click", () => {  
+exitButton.addEventListener("click", (e) => {  
     hidePopUp();
+    loadTemplate();
     e.preventDefault();
 })
+
+
+loadTemplate()
