@@ -7,7 +7,9 @@ const title = document.getElementById("title");
 const asideb = document.getElementById("aside-b");
 const errorMsg = document.createElement("p");
 const completionMsg = document.createElement("p");
-const removeMsg = document.createElement("p")
+const removeMsg = document.createElement("p");
+const readyButton = document.getElementById("readyButton");
+const popUp = document.getElementById("popUp");
 
 // ! Adding Event listener to the add button
 addButton.addEventListener("click", (e) => {
@@ -147,6 +149,15 @@ const addEventsToBook = (trashButtonArray, stockButton) => {
         }
     })
 }
+
+readyButton.addEventListener("click", () => {
+    popUp.remove()
+    setTimeout(() => {
+        popUp.style.opacity = '0'; // Smoothly transition the opacity to 0 (fully transparent)
+    }, 30000);
+});
+
+// openingPopup()
 
 // * Update BEM to appropriate naming, focus on component-based naming
 // * Update your JS to incorporate the updated BEM names
