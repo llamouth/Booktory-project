@@ -29,9 +29,17 @@ const creatingTextContent = (element, text) => {
 const hidePopUp = () => {
     if(popUp.classList.contains("hidden")){
         popUp.classList.remove("hidden");
-    }else {
+        
+        setTimeout(() => {
+            popUp.style.opacity = '95%'; // Smoothly transition the opacity to 95% (partialy visible)
+        }, 50); 
+    }else {; 
+        setTimeout(() => {
+            popUp.style.opacity = '0'; // Smoothly transition the opacity to 0 (fully transparent)
+        }, 300);
         popUp.classList.add("hidden");
     }
+    
 }
 
 // ! Function to remove the book when the trash is clicked
@@ -50,6 +58,10 @@ const resetValues = (elements) => {
 // ! Function to validate the input text
 const validateForm = () => {
     for(let i = 0; i < form.length - 2; i++) {
+        console.log(form[i].placeholder)
+        if(form[i].placeholder === "Image URL"){
+            continue;
+        }
         if(form[i].value.trim() === ""){
             handleErrorMsg();
             return false;
@@ -105,13 +117,13 @@ const changeStateOfStock = (stock) => {
 
 const loadTemplate = () => {
     settingAttributes(template, ["class", "template"]);
-    creatingTextContent(template, "Add Books To Your Inventory")
+    creatingTextContent(template, "Add Books To Your Inventory");
     checkAmountOfBooks();
-    appendElements(bookList, [template])
+    appendElements(bookList, [template]);
 }
 
 const checkAmountOfBooks = () => {
-    const listOfBooks = document.getElementsByTagName("li")
+    const listOfBooks = document.getElementsByTagName("li");
     if(listOfBooks.length !== 0) {
         settingAttributes(template, ["class", "template hidden"]);
     }
@@ -131,6 +143,7 @@ const generateBook = (bookObj) => {
 
     settingAttributes(book, ["class", "book"]);
     settingAttributes(imgTag, ["src", bookObj.img]);
+    settingAttributes(imgTag, ["onerror", "this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/12/19/20/32/paper-1100254_640.jpg';" ])
     settingAttributes(bookInfo, ["class", "bookList__info"]);
     settingAttributes(titleTag, ["class", "title"]);
     settingAttributes(authorTag, ["class", "author"]);

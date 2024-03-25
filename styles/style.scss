@@ -12,7 +12,6 @@ html, body {
 }
 
 body {
-    // border: 2px solid red;
     padding: 0;
     letter-spacing: 5px;
     display: flex;
@@ -21,7 +20,6 @@ body {
 }
 
 .layout {
-    // border: 2px solid blue;
     height: 100%;
     width: 100%;
     display: grid;
@@ -33,18 +31,24 @@ body {
 }
 
 .header {
-    // border: 2px solid green;
     grid-area: header;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     position: relative;
     border-bottom: 2px solid $third-color;
+    transition: color 1s ease-in-out;
 
     p {
         font-size: 50px;
         color: $third-color;
         font-weight: 600;
+        transition: letter-spacing 1s ease-in-out;
+
+        &:hover{
+            color: #2C395E;
+            letter-spacing: 50px;
+        }
     }
 
     button {
@@ -75,7 +79,6 @@ body {
 
 }
 .bookList{
-    // border: 2px solid pink;
     display: grid;
     grid-auto-flow: column;
     max-width: 1305px;
@@ -89,13 +92,12 @@ body {
     margin-bottom: 0;
 
     li {
-        // border: 2px solid white;
         padding: 0px 35px;
         margin: 40px 0px;
         height: 600px;
-        width: 450px;
+        width: 400px;
         background: $third-color;
-        box-shadow: 0px 5px 5px black;
+        // box-shadow: 0px 5px 5px black;
         display: grid;
         grid-template-rows: 1fr 1fr;
         grid-template-areas: 
@@ -104,9 +106,10 @@ body {
 
         img {
             grid-area: img;
-            width: 200px;
+            height: 250px;
             align-self: center;
-            justify-self: start;
+            justify-self: center;
+            box-shadow: 5px 5px 5px gray;
         }
 
         i{
@@ -146,9 +149,9 @@ body {
     background: $sec-color;
     border-radius: 30px;
     z-index: 5;
-    opacity: 95%;
     text-align: center;
-
+    opacity: 0; /* Initially set to transparent */
+    transition: opacity 0.3s ease-in-out;
 }
 #exit {
     position: absolute;
@@ -164,7 +167,6 @@ body {
 }
 
 .form {
-    // border: 2px solid $primary-color;
     display: grid;
     grid-auto-flow: row;
     gap: 7px;
