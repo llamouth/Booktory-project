@@ -151,13 +151,19 @@ const addEventsToBook = (trashButtonArray, stockButton) => {
 }
 
 readyButton.addEventListener("click", () => {
-    popUp.remove()
-    setTimeout(() => {
-        popUp.style.opacity = '0'; // Smoothly transition the opacity to 0 (fully transparent)
-    }, 30000);
+    instructionPopup.style.transition = "opacity 0.5s";
+    instructionPopup.style.opacity = 0;
+
+    // Hide the instruction popup after the animation ends
+    setTimeout(function() {
+        instructionPopup.classList.remove("show");
+    }, 500);
+
+    instructionPopup.classList.add("hidden");
 });
 
-// openingPopup()
+
+
 
 // * Update BEM to appropriate naming, focus on component-based naming
 // * Update your JS to incorporate the updated BEM names
