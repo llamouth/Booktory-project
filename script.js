@@ -7,6 +7,7 @@ const exitButton = document.getElementById("exit")
 const errorMsg = document.createElement("p");
 const completeMsg = document.createElement("p");
 const template = document.createElement("p");
+let cancelDelete = true;
 
 
 
@@ -42,11 +43,37 @@ const hidePopUp = () => {
     
 }
 
+const confirmDelete = (book) => {
+    const confirm = document.createElement("div");
+    const confirmButton = document.createElement("div");
+    const cancel = document.createElement("p");
+
+    confirmButton.addEventListener("click", () => {
+        book.remove()
+    })
+
+    cancel.addEventListener("click", () => {
+        confirm.remove()
+    })
+
+    settingAttributes(confirm, ["class", "confirm"]);
+    settingAttributes(confirmButton, ["class", "confirm__button"])
+    settingAttributes(cancel, ["class", "confirm__cancel"]);
+
+    creatingTextContent(confirm, "Are you sure you want to remove?");
+    creatingTextContent(confirmButton, "Remove");
+    creatingTextContent(cancel, "cancel");
+
+    appendElements(confirm, [confirmButton, cancel])
+    appendElements(book, [confirm])
+}
+
 // ! Function to remove the book when the trash is clicked
 const removeBook = (trash, book) => {
-    trash.addEventListener("click", () => {
-        book.remove();
+    trash.addEventListener("click", (e) => {
+        confirmDelete(book)
         loadTemplate();
+        console.log(e)
     })
 }
 
