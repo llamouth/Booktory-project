@@ -151,15 +151,7 @@ const addEventsToBook = (trashButtonArray, stockButton) => {
 }
 
 readyButton.addEventListener("click", () => {
-    instructionPopup.style.transition = "opacity 0.5s";
-    instructionPopup.style.opacity = 0;
-
-    // Hide the instruction popup after the animation ends
-    setTimeout(function() {
-        instructionPopup.classList.remove("show");
-    }, 500);
-
-    instructionPopup.classList.add("hidden");
+    popUp.remove()
 });
 
 
