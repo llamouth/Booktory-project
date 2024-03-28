@@ -2,6 +2,10 @@
 
 Lets say you have a book store and you want to have a website that holds your book inventory. Well do I have the solution for you. Welcome to Booktory! Here you are able to create an inventory for all the books you own/want. This interactive website allows you to input the data you need to keep track of the books you own or you have interest in acquiring. 
 
+## 📎&nbsp; Link To Live Website
+
+[Click Here to visit website.](https://llamouth.github.io/Booktory-project/)
+
 ## 🚀&nbsp; Getting Started
 
 This project is aimed at solidifying your understanding of fundamental web development concepts by applying them in a project-based scenario. To get started:
@@ -50,6 +54,3 @@ To work on this project, you'll need:
 
 Knowledge in HTML, CSS, and JavaScript is essential as you'll be working extensively with these technologies.
 
-## 📎&nbsp; Link 
-
-[Click Here to visit website.](https://llamouth.github.io/Booktory-project/)
